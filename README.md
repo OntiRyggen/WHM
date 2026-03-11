@@ -28,9 +28,11 @@ This system provides comprehensive warehouse operations management including:
 
 ### Prerequisites
 
-- Node.js (v14 or higher)
+- Node.js (v16.0.0 or higher recommended, minimum v12.0.0)
 - MySQL (v8.0 or higher)
 - npm or yarn
+
+**Note**: If you encounter `Cannot find module 'node:buffer'` errors with older Node.js versions, the package.json uses mysql2@2.3.3 for compatibility.
 
 ### Installation
 
