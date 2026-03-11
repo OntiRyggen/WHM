@@ -2,6 +2,7 @@ require('dotenv').config();
 const app = require('./app');
 const { checkHealth, closePool } = require('./db/connection');
 
+// cPanel provides the port via environment variable
 const PORT = process.env.PORT || 3000;
 
 async function startServer() {
@@ -11,13 +12,14 @@ async function startServer() {
     
     if (!health.healthy) {
       console.error('Database connection failed:', health.error);
-      console.error('Please ensure PostgreSQL is running and configured correctly.');
+      console.error('Please ensure MySQL is running and configured correctly.');
       process.exit(1);
     }
     
     console.log('Database connection successful');
     
-    const server = app.listen(PORT, () => {
+    // Listen on all interfaces (0.0.0.0) for cPanel compatibility
+    const server = app.listen(PORT, '0.0.0.0', () => {
       console.log(`Warehouse Management System running on port ${PORT}`);
       console.log(`Environment: ${process.env.NODE_ENV || 'development'}`);
       console.log(`Health check: http://localhost:${PORT}/health`);
