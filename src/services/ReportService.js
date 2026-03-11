@@ -173,7 +173,7 @@ class ReportService {
         
         return {
           sku: item.sku,
-          description: product?.description,
+          description: product ? product.description : null,
           quantity: item.quantity,
           location: item.locationName,
           salePrice: product ? parseFloat(product.sale_price) : 0,

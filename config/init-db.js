@@ -28,9 +28,16 @@ async function initializeDatabase() {
       .map(stmt => stmt.trim())
       .filter(stmt => stmt.length > 0 && !stmt.startsWith('--'));
     
-    for (const statement of statements) {
+    for (let i = 0; i < statements.length; i++) {
+      const statement = statements[i];
       if (statement) {
-        await client.query(statement);
+        try {
+          await client.query(statement);
+          console.log(`Executed statement ${i + 1}/${statements.length}`);
+        } catch (err) {
+          console.error(`Error executing statement ${i + 1}:`, statement.substring(0, 100));
+          throw err;
+        }
       }
     }
     

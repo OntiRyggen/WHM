@@ -112,7 +112,7 @@ CREATE TABLE audit_logs (
 ) ENGINE=InnoDB;
 
 -- Indexes for performance optimization
-CREATE INDEX idx_products_description ON products(description);
+CREATE INDEX idx_products_description ON products(description(255));
 CREATE INDEX idx_inventory_sku ON inventory(sku);
 CREATE INDEX idx_transactions_timestamp ON transactions(timestamp);
 CREATE INDEX idx_audit_logs_user_timestamp ON audit_logs(user_id, timestamp);
