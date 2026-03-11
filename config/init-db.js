@@ -22,24 +22,8 @@ async function initializeDatabase() {
     const schema = fs.readFileSync(schemaPath, 'utf8');
     
     console.log('Executing schema...');
-    // Split by semicolons and execute each statement separately
-    const statements = schema
-      .split(';')
-      .map(stmt => stmt.trim())
-      .filter(stmt => stmt.length > 0 && !stmt.startsWith('--'));
-    
-    for (let i = 0; i < statements.length; i++) {
-      const statement = statements[i];
-      if (statement) {
-        try {
-          await client.query(statement);
-          console.log(`Executed statement ${i + 1}/${statements.length}`);
-        } catch (err) {
-          console.error(`Error executing statement ${i + 1}:`, statement.substring(0, 100));
-          throw err;
-        }
-      }
-    }
+    // Execute the entire schema at once with multipleStatements enabled
+    await client.query(schema);
     
     console.log('Database schema initialized successfully!');
     
