@@ -10,6 +10,7 @@ async function initializeDatabase() {
     database: process.env.DB_NAME,
     user: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
+    multipleStatements: true
   });
 
   try {
@@ -21,7 +22,17 @@ async function initializeDatabase() {
     const schema = fs.readFileSync(schemaPath, 'utf8');
     
     console.log('Executing schema...');
-    await client.query(schema);
+    // Split by semicolons and execute each statement separately
+    const statements = schema
+      .split(';')
+      .map(stmt => stmt.trim())
+      .filter(stmt => stmt.length > 0 && !stmt.startsWith('--'));
+    
+    for (const statement of statements) {
+      if (statement) {
+        await client.query(statement);
+      }
+    }
     
     console.log('Database schema initialized successfully!');
     
