@@ -29,7 +29,7 @@ This system provides comprehensive warehouse operations management including:
 ### Prerequisites
 
 - Node.js (v14 or higher)
-- PostgreSQL (v12 or higher)
+- MySQL (v8.0 or higher)
 - npm or yarn
 
 ### Installation
@@ -41,16 +41,16 @@ git clone https://github.com/YOUR_USERNAME/warehouse-management-system.git
 cd warehouse-management-system
 ```
 
-**2. Start PostgreSQL**
+**2. Start MySQL**
 
 ```bash
-sudo systemctl start postgresql
+sudo systemctl start mysql
 ```
 
 **3. Create Database User and Database**
 
 ```bash
-sudo -u postgres psql -f config/create-user.sql
+mysql -u root -p < config/create-user.sql
 ```
 
 **4. Configure Environment**
@@ -166,7 +166,7 @@ ISC
 
 The default configuration in `.env`:
 - **Host**: `localhost`
-- **Port**: `5432`
+- **Port**: `3306`
 - **User**: `warehouse_user`
 - **Password**: `warehouse_secure_pass_2024`
 - **Database**: `warehouse_db`
@@ -184,7 +184,7 @@ You can modify these values in your `.env` file as needed.
 ## Technology Stack
 
 - **Backend**: Node.js with Express.js
-- **Database**: PostgreSQL
+- **Database**: MySQL
 - **Authentication**: JWT tokens with bcrypt password hashing
 - **Testing**: Jest with fast-check for property-based testing
 - **Frontend**: Vanilla JavaScript with responsive CSS
