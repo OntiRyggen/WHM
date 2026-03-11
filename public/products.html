@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products - WMS</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-brand">WMS</div>
+        <div class="nav-links">
+            <a href="/dashboard.html">Dashboard</a>
+            <a href="/products.html">Products</a>
+            <a href="/inventory.html">Inventory</a>
+            <a href="/shipments.html">Shipments</a>
+            <a href="/orders.html">Orders</a>
+            <a href="/reports.html" id="reportsLink">Reports</a>
+            <span id="userInfo"></span>
+            <button onclick="logout()" class="btn btn-secondary">Logout</button>
+        </div>
+    </nav>
+    
+    <div class="container">
+        <h1>Product Management</h1>
+        
+        <div class="card" id="createProductSection">
+            <h2>Create New Product</h2>
+            <form id="productForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="sku">SKU *</label>
+                        <input type="text" id="sku" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Description *</label>
+                        <input type="text" id="description" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="purchasePrice">Purchase Price *</label>
+                        <input type="number" id="purchasePrice" step="0.01" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="salePrice">Sale Price *</label>
+                        <input type="number" id="salePrice" step="0.01" required>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Create Product</button>
+                <div id="productError" class="error-message"></div>
+                <div id="productSuccess" class="success-message"></div>
+            </form>
+        </div>
+        
+        <div class="card">
+            <h2>Search Products</h2>
+            <div class="search-bar">
+                <input type="text" id="searchQuery" placeholder="Search by SKU or description...">
+                <button onclick="searchProducts()" class="btn btn-primary">Search</button>
+            </div>
+            
+            <div id="productsTable"></div>
+        </div>
+    </div>
+    
+    <script src="/js/common.js"></script>
+    <script src="/js/products.js"></script>
+</body>
+</html>

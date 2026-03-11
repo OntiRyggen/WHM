@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shipments - WMS</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-brand">WMS</div>
+        <div class="nav-links">
+            <a href="/dashboard.html">Dashboard</a>
+            <a href="/products.html">Products</a>
+            <a href="/inventory.html">Inventory</a>
+            <a href="/shipments.html">Shipments</a>
+            <a href="/orders.html">Orders</a>
+            <a href="/reports.html" id="reportsLink">Reports</a>
+            <span id="userInfo"></span>
+            <button onclick="logout()" class="btn btn-secondary">Logout</button>
+        </div>
+    </nav>
+    
+    <div class="container">
+        <h1>Incoming Shipments</h1>
+        
+        <div class="card">
+            <h2>Create New Shipment</h2>
+            <form id="shipmentForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="supplierName">Supplier Name *</label>
+                        <input type="text" id="supplierName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="arrivalDate">Arrival Date *</label>
+                        <input type="date" id="arrivalDate" required>
+                    </div>
+                </div>
+                
+                <h3>Items</h3>
+                <div id="shipmentItems">
+                    <div class="item-row">
+                        <div class="form-group">
+                            <label>SKU *</label>
+                            <input type="text" class="item-sku" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Quantity *</label>
+                            <input type="number" class="item-quantity" min="1" required>
+                        </div>
+                        <button type="button" onclick="removeItem(this)" class="btn btn-danger btn-sm">Remove</button>
+                    </div>
+                </div>
+                
+                <button type="button" onclick="addItem()" class="btn btn-secondary">Add Item</button>
+                <button type="submit" class="btn btn-primary">Create Shipment</button>
+                
+                <div id="shipmentError" class="error-message"></div>
+                <div id="shipmentSuccess" class="success-message"></div>
+            </form>
+        </div>
+        
+        <div class="card">
+            <h2>Recent Shipments</h2>
+            <div class="date-filter">
+                <label>From:</label>
+                <input type="date" id="startDate">
+                <label>To:</label>
+                <input type="date" id="endDate">
+                <button onclick="loadShipments()" class="btn btn-primary">Filter</button>
+            </div>
+            
+            <div id="shipmentsTable"></div>
+        </div>
+    </div>
+    
+    <script src="/js/common.js"></script>
+    <script src="/js/shipments.js"></script>
+</body>
+</html>

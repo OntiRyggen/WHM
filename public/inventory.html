@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventory - WMS</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-brand">WMS</div>
+        <div class="nav-links">
+            <a href="/dashboard.html">Dashboard</a>
+            <a href="/products.html">Products</a>
+            <a href="/inventory.html">Inventory</a>
+            <a href="/shipments.html">Shipments</a>
+            <a href="/orders.html">Orders</a>
+            <a href="/reports.html" id="reportsLink">Reports</a>
+            <span id="userInfo"></span>
+            <button onclick="logout()" class="btn btn-secondary">Logout</button>
+        </div>
+    </nav>
+    
+    <div class="container">
+        <h1>Inventory Management</h1>
+        
+        <div class="card">
+            <h2>Current Inventory</h2>
+            <div class="inventory-controls">
+                <button onclick="loadInventory()" class="btn btn-primary">Refresh</button>
+                <button onclick="showLowStock()" class="btn btn-secondary">Show Low Stock</button>
+            </div>
+            
+            <div id="inventoryTable"></div>
+        </div>
+        
+        <div id="moveLocationModal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal()">&times;</span>
+                <h2>Move Product Location</h2>
+                <form id="moveLocationForm">
+                    <div class="form-group">
+                        <label>Product SKU</label>
+                        <input type="text" id="moveSku" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label>Current Location</label>
+                        <input type="text" id="currentLocation" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="newLocation">New Location *</label>
+                        <select id="newLocation" required>
+                            <option value="">Select location...</option>
+                            <option value="Warehouse A">Warehouse A</option>
+                            <option value="Warehouse B">Warehouse B</option>
+                            <option value="Loading Dock">Loading Dock</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Move Location</button>
+                    <div id="moveError" class="error-message"></div>
+                    <div id="moveSuccess" class="success-message"></div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <script src="/js/common.js"></script>
+    <script src="/js/inventory.js"></script>
+</body>
+</html>

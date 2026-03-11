@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reports - WMS</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-brand">WMS</div>
+        <div class="nav-links">
+            <a href="/dashboard.html">Dashboard</a>
+            <a href="/products.html">Products</a>
+            <a href="/inventory.html">Inventory</a>
+            <a href="/shipments.html">Shipments</a>
+            <a href="/orders.html">Orders</a>
+            <a href="/reports.html" id="reportsLink">Reports</a>
+            <span id="userInfo"></span>
+            <button onclick="logout()" class="btn btn-secondary">Logout</button>
+        </div>
+    </nav>
+    
+    <div class="container">
+        <h1>Reports & Analytics</h1>
+        
+        <div class="reports-grid">
+            <div class="card">
+                <h2>Inventory Report</h2>
+                <p>View current inventory levels and values</p>
+                <button onclick="generateInventoryReport()" class="btn btn-primary">Generate Report</button>
+                <button onclick="exportReport('inventory')" class="btn btn-secondary">Export CSV</button>
+            </div>
+            
+            <div class="card">
+                <h2>Transaction Report</h2>
+                <p>View all shipments and orders</p>
+                <div class="form-group">
+                    <label>From:</label>
+                    <input type="date" id="transStartDate">
+                </div>
+                <div class="form-group">
+                    <label>To:</label>
+                    <input type="date" id="transEndDate">
+                </div>
+                <button onclick="generateTransactionReport()" class="btn btn-primary">Generate Report</button>
+                <button onclick="exportReport('transactions')" class="btn btn-secondary">Export CSV</button>
+            </div>
+            
+            <div class="card">
+                <h2>Profit Report</h2>
+                <p>Analyze profit margins and revenue</p>
+                <div class="form-group">
+                    <label>From:</label>
+                    <input type="date" id="profitStartDate">
+                </div>
+                <div class="form-group">
+                    <label>To:</label>
+                    <input type="date" id="profitEndDate">
+                </div>
+                <button onclick="generateProfitReport()" class="btn btn-primary">Generate Report</button>
+                <button onclick="exportReport('profit')" class="btn btn-secondary">Export CSV</button>
+            </div>
+            
+            <div class="card">
+                <h2>Low Stock Report</h2>
+                <p>Products below threshold</p>
+                <div class="form-group">
+                    <label>Threshold:</label>
+                    <input type="number" id="threshold" value="10" min="0">
+                </div>
+                <button onclick="generateLowStockReport()" class="btn btn-primary">Generate Report</button>
+                <button onclick="exportReport('low-stock')" class="btn btn-secondary">Export CSV</button>
+            </div>
+        </div>
+        
+        <div class="card" id="reportResults" style="display: none;">
+            <div class="report-header">
+                <h2 id="reportTitle">Report Results</h2>
+                <button onclick="closeReport()" class="btn btn-secondary">Close</button>
+            </div>
+            <div id="reportContent"></div>
+        </div>
+    </div>
+    
+    <script src="/js/common.js"></script>
+    <script src="/js/reports.js"></script>
+</body>
+</html>

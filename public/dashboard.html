@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - WMS</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-brand">WMS</div>
+        <div class="nav-links">
+            <a href="/dashboard.html">Dashboard</a>
+            <a href="/products.html">Products</a>
+            <a href="/inventory.html">Inventory</a>
+            <a href="/shipments.html">Shipments</a>
+            <a href="/orders.html">Orders</a>
+            <a href="/reports.html" id="reportsLink">Reports</a>
+            <span id="userInfo"></span>
+            <button onclick="logout()" class="btn btn-secondary">Logout</button>
+        </div>
+    </nav>
+    
+    <div class="container">
+        <h1>Dashboard</h1>
+        
+        <div class="stats-overview">
+            <div class="stat-card stat-primary">
+                <div class="stat-icon">📦</div>
+                <div class="stat-details">
+                    <h3 id="productCount">-</h3>
+                    <p>Total Products</p>
+                </div>
+            </div>
+            
+            <div class="stat-card stat-success">
+                <div class="stat-icon">📊</div>
+                <div class="stat-details">
+                    <h3 id="inventoryCount">-</h3>
+                    <p>Inventory Items</p>
+                </div>
+            </div>
+            
+            <div class="stat-card stat-warning">
+                <div class="stat-icon">⚠️</div>
+                <div class="stat-details">
+                    <h3 id="lowStockCount">-</h3>
+                    <p>Low Stock Items</p>
+                </div>
+            </div>
+            
+            <div class="stat-card stat-info" id="totalValueCard">
+                <div class="stat-icon">💰</div>
+                <div class="stat-details">
+                    <h3 id="totalValue">-</h3>
+                    <p>Total Inventory Value</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="dashboard-grid">
+            <div class="card">
+                <h3>Recent Activity</h3>
+                <div id="recentActivity">
+                    <p class="loading">Loading...</p>
+                </div>
+            </div>
+            
+            <div class="card">
+                <h3>Quick Actions</h3>
+                <div class="quick-actions">
+                    <a href="/products.html" class="action-btn">
+                        <span class="action-icon">📦</span>
+                        <span>Manage Products</span>
+                    </a>
+                    <a href="/inventory.html" class="action-btn">
+                        <span class="action-icon">📊</span>
+                        <span>View Inventory</span>
+                    </a>
+                    <a href="/shipments.html" class="action-btn">
+                        <span class="action-icon">📥</span>
+                        <span>Create Shipment</span>
+                    </a>
+                    <a href="/orders.html" class="action-btn">
+                        <span class="action-icon">📤</span>
+                        <span>Create Order</span>
+                    </a>
+                    <a href="/reports.html" class="action-btn" id="reportsAction">
+                        <span class="action-icon">📈</span>
+                        <span>View Reports</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card" id="lowStockSection" style="display: none;">
+            <h3>Low Stock Alert</h3>
+            <div id="lowStockItems"></div>
+        </div>
+    </div>
+    
+    <script src="/js/common.js"></script>
+    <script src="/js/dashboard.js"></script>
+</body>
+</html>
