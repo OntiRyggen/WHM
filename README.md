@@ -2,38 +2,72 @@
 
 A complete warehouse management system for small import firms with inventory tracking, shipment/order processing, and reporting capabilities.
 
+## Overview
+
+This system provides comprehensive warehouse operations management including:
+- Multi-user role-based access control
+- Real-time inventory tracking with location management
+- Incoming shipment and outgoing order processing
+- Automated profit calculations with price history tracking
+- Detailed reporting and audit trails
+- CSV export capabilities for all reports
+
 ## Features
 
-- Role-based access control (Manager & Warehouse Staff)
-- Product management with price history
-- Inventory tracking with location management
-- Incoming shipment processing
-- Outgoing order processing with stock validation
-- Profit calculations and reporting
-- Audit logging for all operations
-- CSV export for reports
+- **Role-Based Access Control**: Manager and Warehouse Staff roles with different permissions
+- **Product Management**: Create, update, and search products with automatic price history tracking
+- **Inventory Tracking**: Real-time stock levels with warehouse location management
+- **Shipment Processing**: Record incoming shipments and automatically update inventory
+- **Order Processing**: Create outgoing orders with stock validation and automatic inventory deduction
+- **Profit Calculations**: Automatic profit tracking using FIFO cost basis
+- **Comprehensive Reporting**: Inventory, transactions, profit analysis, and low-stock alerts
+- **Audit Logging**: Complete audit trail for all system operations
+- **CSV Export**: Export all reports to CSV format for external analysis
 
 ## Quick Start
 
-### 1. Start PostgreSQL
+### Prerequisites
+
+- Node.js (v14 or higher)
+- PostgreSQL (v12 or higher)
+- npm or yarn
+
+### Installation
+
+**1. Clone the repository**
+
+```bash
+git clone https://github.com/YOUR_USERNAME/warehouse-management-system.git
+cd warehouse-management-system
+```
+
+**2. Start PostgreSQL**
 
 ```bash
 sudo systemctl start postgresql
 ```
 
-### 2. Create Database User and Database
+**3. Create Database User and Database**
 
 ```bash
 sudo -u postgres psql -f config/create-user.sql
 ```
 
-### 3. Install Dependencies
+**4. Configure Environment**
+
+Copy `.env.example` to `.env` and update if needed:
+
+```bash
+cp .env.example .env
+```
+
+**5. Install Dependencies**
 
 ```bash
 npm install
 ```
 
-### 4. Setup Database (Initialize + Seed)
+**6. Setup Database (Initialize + Seed)**
 
 ```bash
 npm run setup
@@ -41,7 +75,7 @@ npm run setup
 
 This will create all tables and seed default users and locations.
 
-### 5. Run the Application
+**7. Run the Application**
 
 ```bash
 npm start
@@ -114,16 +148,63 @@ Run tests in watch mode:
 npm run test:watch
 ```
 
+The test suite includes:
+- Unit tests for authentication and authorization
+- Integration tests for API endpoints
+- Property-based tests using fast-check for data validation
+- Tests for shipment and order processing logic
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## License
+
+ISC
+
 ## Database Configuration
 
-The `.env` file contains:
+The default configuration in `.env`:
+- **Host**: `localhost`
+- **Port**: `5432`
 - **User**: `warehouse_user`
 - **Password**: `warehouse_secure_pass_2024`
 - **Database**: `warehouse_db`
+
+You can modify these values in your `.env` file as needed.
+
+## Security Notes
+
+- Never commit your `.env` file to version control
+- Change default passwords in production
+- JWT tokens expire after 8 hours
+- All passwords are hashed using bcrypt
+- API endpoints are protected with JWT authentication middleware
 
 ## Technology Stack
 
 - **Backend**: Node.js with Express.js
 - **Database**: PostgreSQL
-- **Authentication**: JWT tokens (8-hour expiration)
+- **Authentication**: JWT tokens with bcrypt password hashing
 - **Testing**: Jest with fast-check for property-based testing
+- **Frontend**: Vanilla JavaScript with responsive CSS
+
+## Project Structure
+
+```
+warehouse-management-system/
+├── config/              # Database setup and configuration scripts
+├── public/              # Frontend HTML, CSS, and JavaScript
+│   ├── css/            # Stylesheets
+│   └── js/             # Client-side JavaScript modules
+├── src/
+│   ├── db/             # Database connection
+│   ├── errors/         # Custom error classes
+│   ├── middleware/     # Express middleware (auth, validation, error handling)
+│   ├── models/         # Data models
+│   ├── routes/         # API route handlers
+│   ├── services/       # Business logic layer
+│   ├── app.js          # Express app configuration
+│   └── server.js       # Server entry point
+└── tests/              # Test suites
+```
